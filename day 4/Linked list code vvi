@@ -1,0 +1,102 @@
+
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+
+class Solution
+{
+  static  Node head;
+    
+  static  class Node{
+        
+        int data;
+        Node  next;
+        Node(int d)
+        {
+            data=d;
+            next=null;
+        }
+    }
+	public static void main (String[] args) throws java.lang.Exception
+	{
+
+
+Node prev=null;
+for(int i=1;i<=5;i++)
+{
+	prev=	insertdata(prev,i);
+}		
+
+// System.out.println(prev.next);
+prev.next=head.next;
+
+// System.out.println(prev.next.data);
+
+// printlist( head);
+detectloopand remove(head);
+		 printlist( head);
+
+	}
+	
+	
+	static Node insertdata(Node prev,int d)
+	{
+	    Node newnode= new Node(d);
+	
+	    if(head==null)
+{
+    head=newnode;
+}
+
+  else  if(prev!=null)
+	    {
+	prev.next= newnode;
+	
+	    }
+prev=newnode;
+	    
+	    return prev;
+	}
+	
+	
+	
+	static void printlist(Node h)
+	{
+	    while(h!=null)
+	    {
+	        System.out.println(h.data);
+	        h= h.next;
+	    }
+	}
+	
+	static void detectloopand remove (Node h){
+	    
+	    if(h==null|| h.next==null)
+	    {
+	        System.out.println("No loop");
+	    }
+	    
+	    else{
+	       HashSet<Node> set= new HashSet<>();
+	       
+	       while(h!=null)
+	       {
+	           if(set.contains(h.next)){
+	               System.out.println("Loop detected");
+	               h.next=null;
+	               return;
+	           }
+	           else{
+	               set.add(h);
+	               h=h.next;
+	           }
+	       }
+	       System.out.println("No Loop detected");
+	    }
+	    
+	}
+	
+	
+}
